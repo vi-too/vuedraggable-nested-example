@@ -7,15 +7,15 @@
     :move="checkMove"
     @input="emitted"
   >
-    <template v-for="(el, index) in realValue">
-      <b-card class="mb-2" :no-body="true" :key="'card-' + el.id">
+    <div v-for="(el, index) in realValue" :key="'card-' + el.id">
+      <b-card class="mb-2" :no-body="true">
         <template v-slot:header>
           <h3 class="h5 m-0 d-flex justify-content-between">
             <span>{{el.title}}</span>
             <b-button size="sm" v-b-toggle="'collapse-' + el.id">T</b-button>
           </h3>
         </template>
-        <b-collapse :id="'collapse-' + el.id" accordion="nested-draggable">
+        <b-collapse :id="'collapse-' + el.id">
           <b-card-body>
             <b-card-text>
               <em>Move:</em>
@@ -52,15 +52,11 @@
         :top-sibling="index === 0 ? undefined : realValue[index - 1]"
         :parent="el"
         :list="el.children"
-        :key="'nested-' + el.id"
         @toTop="toTop"
         @underTopSibling="underTopSibling"
         @outFromParent="outFromParent"
       ></nested-draggable>
-    </template>
-
-    <!-- <b-list-group v-for="el in realValue" :key="el.id"> -->
-    <!-- </b-list-group> -->
+    </div>
   </draggable>
 </template>
 
